@@ -16,8 +16,8 @@ const contractAddress = aceloContractAddress;
 
 export default function Test3() {
 
-    const web3 = useRecoilValue(web3State);
-    const contract = useRecoilValue(contractState);
+    // const web3 = useRecoilValue(web3State);
+    // const contract = useRecoilValue(contractState);
     
     const [favnum, setFavnum] = useState(0);
     const [errorLog, setErrorLog] = useState(null);
@@ -29,10 +29,10 @@ export default function Test3() {
                 // get accounts
                 window.ethereum.request({ method: 'eth_requestAccounts' })
                 .then(async () => {
-                    // const web3Instance = new Web3(window.ethereum);
-                    // const contractInstance = new web3Instance.eth.Contract(contractABI, contractAddress);
-                    // const accounts = await web3Instance.eth.getAccounts();
-                    const accounts = await web3.eth.getAccounts();
+                    const web3Instance = new Web3(window.ethereum);
+                    const contractInstance = new web3Instance.eth.Contract(contractABI, contractAddress);
+                    const accounts = await web3Instance.eth.getAccounts();
+                    // const accounts = await web3.eth.getAccounts();
                     console.log("accounts", accounts);
                     // contractInstance.methods.store(favnum).send({ from: accounts[0] })
                     contract.methods.store(favnum).send({ from: accounts[0] })
